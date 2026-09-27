@@ -1,0 +1,32 @@
+name,email,phone,city,order_value
+Ana Silva,ana.silva@gmail.com,(11) 99999-0001,São Paulo,"R$ 1.299,90"
+Bruno Costa,bruno.costa@outlook.com,+55 11 99999-0002,Rio de Janeiro,$3.99
+Carla Dias,carla.dias@gmail.com,11999990003,Curitiba,"R$ 45,00"
+Davi Lacerda,davi@email.com,(21) 99999-0004,Belo Horizonte,"1,299.90"
+Eva Matos,eva.matos@empresa.com.br,021 99999-0005,Niterói,"R$ 89,90"
+Fábio Nunes,fabio@@x,(31) 99999-0006,Belo Horizonte,$12.50
+Gabriel Rocha,gabriel.rocha@gmail.com,+55 31 99999-0007,Uberlândia,"R$ 2.500,00"
+Helena Prado,helena.prado@uol.com.br,31999990008,Juiz de Fora,$ 9.99
+Igor Sampaio,igor@,(41) 99999-0009,Curitiba,"R$ 150,00"
+Juliana Reis,juliana.reis@gmail.com,+1 415 555 0010,San Francisco,"1,299.90"
+Karen Bueno,karen.bueno@hotmail.com,11 99999-0012,Santo André,$250.00
+Lucas Ferreira,lucas.ferreira@,(85) 99999-0013,Fortaleza,"R$ 310,75"
+Mariana Alves,mariana.alves@gmail.com,(85) 99999-0014,Recife,"R$ 78,40"
+Nelson Cruz,nelson.cruz@empresa.com,85 3333-0015,Salvador,"R$ 4.500,00"
+Paulo Mendes,paulo.mendes@gmail.com,99999-0017,Campinas,"R$ 20,00"
+Queren Lima,queren.lima@icloud.com,+55 11 97777-0018,São Paulo,"R$ 640,00"
+Rafael Torres,rafael@gmail.com,(11) 97777-0019,Guarulhos,"R$ 1.299,90"
+Beatriz Almeida,bad email.com,(21) 96666-0020,Rio de Janeiro,$ 75.00
+Sofia Cardoso,sofia.cardoso@gmail.com,+44 20 7946 0021,London,£ 42.00
+Thiago Ramos,thiago.ramos@outlook.com,21966660022,Rio de Janeiro,"$1,150.75"
+Ursula Vieira,ursula.vieira@gmail.com,(11) 95555-0023,São Paulo,"R$ 55,00"
+Vitor Barros,vitor.barros@,(48) 95555-0024,Florianópolis,$18.99
+Wanda Peixoto,wanda.peixoto@uol.com.br,+55 48 99999-0025,Florianópolis,"R$ 210,10"
+Yasmin Duarte,yasmin.duarte@gmail.com,(61) 99999-0026,Brasília,"R$ 1.050,00"
+Zeca Camargo,zeca.camargo@@y,(61) 99999-0027,Goiânia,$8.25
+Diego Prado,diego.prado@gmail.com,(11) 98888-1001,São Paulo,"R$ 75,00"
+Elisa Ramos,elisa.ramos@gmail.com,+55 21 98888-1002,Rio de Janeiro,$ 40.00
+Fernanda Lopes,fernanda.lopes@icloud.com,31988881004,Belo Horizonte,"1,199.90"
+Gustavo Braga,gustavo.braga@hotmail.com,+55 61 98888-1006,Brasília,"R$ 310,00"
+Hugo Castro,hugo.castro@empresa.com.br,(85) 98888-1007,Fortaleza,$ 88.00
+Ines Duarte,ines.duarte@uol.com.br,(61) 98888-1009,Brasília,"R$ 509,99"

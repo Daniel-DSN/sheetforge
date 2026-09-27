@@ -1,0 +1,8 @@
+$ python -m sheetforge.cli clean samples/messy.csv -o demo/out.xlsx --report demo/bad.csv --summary demo/summary.md
+SheetForge 1.0.0 — clean samples/messy.csv
+[stats] 30 rows in → 25 rows out · 5 dupes removed (3 exact + 2 email)
+[stats] emails 19 valid / 6 invalid · phones 12 fixed · columns coerced: order_value
+[ok] wrote 25 rows → demo/out.xlsx
+[warn] 7 flagged rows → demo/bad.csv
+[ok] summary → demo/summary.md
+[exit] 2

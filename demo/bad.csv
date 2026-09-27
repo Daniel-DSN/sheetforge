@@ -1,0 +1,8 @@
+row,name,email,phone,city,order_value,reason
+6,Fábio Nunes,fabio@@x,(31) 99999-0006,Belo Horizonte,$12.50,invalid email: fabio@@x
+9,Igor Sampaio,igor@,(41) 99999-0009,Curitiba,"R$ 150,00",invalid email: igor@
+14,Lucas Ferreira,lucas.ferreira@,(85) 99999-0013,Fortaleza,"R$ 310,75",invalid email: lucas.ferreira@
+19,Paulo  Mendes,paulo.mendes@gmail.com,99999-0017,Campinas,"R$ 20,00",invalid phone: 99999-0017
+22,Beatriz  Almeida,bad email.com,(21) 96666-0020,Rio de Janeiro,$ 75.00,invalid email: bad email.com
+26,Vitor Barros,vitor.barros@,(48) 95555-0024,Florianópolis,$18.99,invalid email: vitor.barros@
+30,Zeca Camargo,zeca.camargo@@y,(61) 99999-0027,Goiânia,$8.25,invalid email: zeca.camargo@@y

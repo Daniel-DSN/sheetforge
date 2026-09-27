@@ -1,0 +1,5 @@
+$ python -m sheetforge.cli merge samples/messy.csv samples/messy_b.csv -o demo/merged.csv --key email
+SheetForge 1.0.0 — merge samples/messy.csv + samples/messy_b.csv (key=email)
+[stats] A=30 · B=10 · overlap=4 · new=6 · dupes removed=9
+[ok] wrote 31 rows → demo/merged.csv
+[exit] 0
