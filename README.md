@@ -135,6 +135,16 @@ src/sheetforge/
 - **I/O is isolated** — one dispatch point picks the writer from the output suffix
 - **Flagging never drops data** — bad rows survive in the output and are listed in `bad.csv`
 
+## Performance
+
+Synthetic benchmark on a 4-thread i3-2328M / Python 3.12: **50,000 rows × 10
+columns cleaned and written to CSV in ~5 s end-to-end** (median of 3 runs,
+including the flagged-row report and markdown summary). XLSX export of the same
+data takes ~27 s because every cell is serialized as XML.
+
+Reproduce: `PYTHONPATH=src python3 benchmarks/bench_clean.py --rows 50000 --runs 3`
+· details: [BENCHMARK.md](BENCHMARK.md)
+
 ## Testing
 
 ```bash

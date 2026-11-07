@@ -131,18 +131,22 @@ def to_json(table: Table, path: str | Path) -> Path:
 
 def to_xlsx(table: Table, path: str | Path) -> Path:
     from openpyxl import Workbook
+    from openpyxl.cell import WriteOnlyCell
     from openpyxl.styles import Font
 
     target = Path(path)
-    workbook = Workbook()
-    sheet = workbook.active
-    sheet.title = "data"
-    sheet.append(table.columns)
+    workbook = Workbook(write_only=True)
+    sheet = workbook.create_sheet("data")
+    sheet.freeze_panes = "A2"
+    bold = Font(bold=True)
+    header = []
+    for col in table.columns:
+        cell = WriteOnlyCell(sheet, value=col)
+        cell.font = bold
+        header.append(cell)
+    sheet.append(header)
     for row in table.rows:
         sheet.append([row.get(col, "") for col in table.columns])
-    for cell in sheet[1]:
-        cell.font = Font(bold=True)
-    sheet.freeze_panes = "A2"
     workbook.save(target)
     return target
 

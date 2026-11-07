@@ -82,7 +82,14 @@ class MergeResult:
 def normalize_text(value: Any) -> str:
     if value is None:
         return ""
-    return SPACE_RE.sub(" ", str(value)).strip()
+    text = value if isinstance(value, str) else str(value)
+    if not text:
+        return ""
+    # Fast path: most cells are already clean. Only pay for the regex when the
+    # value has control whitespace, doubled spaces or surrounding whitespace.
+    if text.isprintable() and text.strip() == text and "  " not in text:
+        return text
+    return SPACE_RE.sub(" ", text).strip()
 
 
 def normalize_email(value: Any) -> EmailResult:
@@ -158,12 +165,27 @@ def parse_number(value: Any) -> float | None:
     return -number if negative else number
 
 
-def is_numeric_column(rows: list[dict[str, Any]], column: str) -> bool:
-    values = [row.get(column, "") for row in rows]
-    filled = [value for value in values if normalize_text(value)]
-    if not filled:
-        return False
-    return all(parse_number(value) is not None for value in filled)
+def parse_numeric_column(
+    rows: list[dict[str, Any]], column: str
+) -> list[float | None] | None:
+    """Return one parsed value per row, or ``None`` if the column is not numeric.
+
+    Text columns fail on the first non-numeric cell instead of scanning (and
+    parsing) every row; numeric columns are parsed once and reused for coercion.
+    """
+    parsed: list[float | None] = []
+    found = False
+    for row in rows:
+        text = normalize_text(row.get(column, ""))
+        if not text:
+            parsed.append(None)
+            continue
+        number = parse_number(text)
+        if number is None:
+            return None
+        parsed.append(number)
+        found = True
+    return parsed if found else None
 
 
 def _find_column(columns: list[str], candidates: set[str]) -> str | None:
@@ -224,12 +246,15 @@ def clean_table(table: Table, key: str = "email") -> CleanResult:
 
     protected = {col for col in (email_col, phone_col) if col}
 
-    for _, row in kept:
+    invalid_email: set[int] = set()
+    invalid_phone: set[int] = set()
+    for index, row in kept:
         if email_col and row[email_col]:
             if EMAIL_RE.match(row[email_col]):
                 stats.emails_valid += 1
             else:
                 stats.emails_invalid += 1
+                invalid_email.add(index)
         if phone_col and row[phone_col]:
             result = normalize_phone(row[phone_col])
             row[phone_col] = result.value
@@ -237,23 +262,30 @@ def clean_table(table: Table, key: str = "email") -> CleanResult:
                 stats.phones_fixed += 1
             if not result.valid:
                 stats.phones_invalid += 1
+                invalid_phone.add(index)
 
     kept_rows = [row for _, row in kept]
-    coerced = [
-        col for col in columns if col not in protected and is_numeric_column(kept_rows, col)
-    ]
-    for row in kept_rows:
+    coerced: list[str] = []
+    parsed_columns: dict[str, list[float | None]] = {}
+    for col in columns:
+        if col in protected:
+            continue
+        parsed = parse_numeric_column(kept_rows, col)
+        if parsed is not None:
+            coerced.append(col)
+            parsed_columns[col] = parsed
+    for index, row in enumerate(kept_rows):
         for col in coerced:
-            parsed = parse_number(row.get(col, ""))
-            if parsed is not None:
-                row[col] = parsed
+            value = parsed_columns[col][index]
+            if value is not None:
+                row[col] = value
     stats.columns_coerced = coerced
 
     for index, row in kept:
         reasons: list[str] = []
-        if email_col and row[email_col] and not EMAIL_RE.match(row[email_col]):
+        if index in invalid_email:
             reasons.append(f"invalid email: {row[email_col]}")
-        if phone_col and row[phone_col] and not normalize_phone(row[phone_col]).valid:
+        if index in invalid_phone:
             reasons.append(f"invalid phone: {row[phone_col]}")
         if reasons:
             stats.flagged.append(
