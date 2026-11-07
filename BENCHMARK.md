@@ -1,6 +1,7 @@
 # Benchmark — cleaning 50,000 rows
 
-Synthetic, reproducible benchmark for the `clean` pipeline. The goal is to show
+Measured on 2026-11-07. Synthetic, reproducible benchmark for the `clean`
+pipeline. The goal is to show
 the order of magnitude on modest hardware, not to claim a record. Run it yourself:
 
 ```bash
